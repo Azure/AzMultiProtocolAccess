@@ -1,0 +1,4 @@
+# Lines starting with '#' are comments.
+# Each line below associates a file/directory pattern with one or more GitHub users or teams.
+
+/src/ @derdanu
