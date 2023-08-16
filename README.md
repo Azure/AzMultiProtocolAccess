@@ -57,11 +57,20 @@ az role assignment create --assignee "user@tenant.onmicrosoft.com" \
 
 
 ## Setup
+### Option one
 Before running the sample, you must change "YourAccountName" in the *src/Program.cs* file (line 11) to the name of your storage account created in the step before.
 
 ```csharp
 private static readonly string storageAccountName = "YourAccountName";
 ```        
+
+### Option two
+Assign the storage account name as a command line argument when running the sample.
+
+```console  
+dotnet run YourAccountName
+```
+
 
 ## Running the sample
 To build and run the sample, change to the *src* directory and execute the following command:
