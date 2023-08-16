@@ -7,9 +7,9 @@ namespace AzureStorageMPAdemo
 {
     internal class Program
     {
-
-        private static readonly string storageAccountName = "YourAccountName";
-        private static InteractiveBrowserCredential? azureCredentials;
+        
+        private static string storageAccountName = "YourAccountName";
+        private static DefaultAzureCredential? azureCredentials;
         private static int pageSize = 10;
         private static int files = 50;
         private static int personsPerFile = 250;
@@ -34,14 +34,18 @@ namespace AzureStorageMPAdemo
 
             try
             {
-                Console.WriteLine("Hello Azure Storage Friends!");
 
+                Console.WriteLine("Hello Azure Storage Friends!");
+                                
                 var fakeDataDirectory = Path.Combine(Environment.CurrentDirectory, "FakeData", "FakePersons");
 
                 Console.WriteLine($"Generating Fake Data: {files} files, each file {personsPerFile} persons");
                 generateFakePersionsJSON(fakeDataDirectory, files, personsPerFile);
 
-                azureCredentials = new InteractiveBrowserCredential();
+                if (args.Length > 0) storageAccountName = args[0];
+                Console.WriteLine($"Using storage account: {storageAccountName}");
+
+                azureCredentials = new DefaultAzureCredential(includeInteractiveCredentials: true);
 
                 AzureDataLake dfs = (AzureDataLake)new AzureDataLake()
                     .SetAzureCredentials(azureCredentials)
